@@ -8,4 +8,5 @@ const Assessment = sequelize.define("Assessment", {
     allowNull: false,
   },
 });
+
 export default Assessment;
