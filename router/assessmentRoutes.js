@@ -3,10 +3,15 @@ import {
   getAllAssessment,
   saveAssessments,
 } from "../controller/AssessmentController.js";
-const router = express.Router();
+import { authenticateToken } from "../middleware/authMiddleware.js";
+const assessmentRouter = express.Router();
 
-router.get("/getAssessments", getAllAssessment);
+assessmentRouter.get("/getAssessments", authenticateToken, getAllAssessment);
 
-router.post("/saveAllAssessments", saveAssessments);
+assessmentRouter.post(
+  "/saveAllAssessments",
+  authenticateToken,
+  saveAssessments
+);
 
-export default router;
+export default assessmentRouter;

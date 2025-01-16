@@ -1,9 +1,19 @@
 import sequelize from "../config/db.js";
 import Assessment from "../model/Assessment.js";
+import Option from "../model/Option.js";
 export const getAllAssessment = async (req, res) => {
   try {
     const assessment = await Assessment.findAll();
-    res.status(200).json(assessment);
+    const optionList = await Option.findAll();
+    if (assessment !== 0) {
+      assessment.forEach((n) => {});
+      const responseData = assessment.map((d, i) => ({
+        questionId: d.id,
+        question: d.question,
+        option: optionList,
+      }));
+      res.status(200).json({ status: true, data: responseData });
+    }
   } catch (error) {
     res.status(500).json({ message: "Error fetching users" });
   }
