@@ -15,7 +15,9 @@ export const getAllAssessment = async (req, res) => {
       res.status(200).json({ status: true, data: responseData });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error fetching users" });
+    res
+      .status(500)
+      .json({ message: "Error fetching Questions", error: error.message });
   }
 };
 
