@@ -5,6 +5,6 @@ import { authenticateToken } from "../middleware/authMiddleware.js";
 const userRoutes = express.Router();
 
 userRoutes.post("/userRegistration", userRegistration);
-userRoutes.get("/userLogin", userLogin);
+userRoutes.post("/userLogin", userLogin);
 
 export default userRoutes;
