@@ -14,6 +14,6 @@ assessmentRouter.post(
   authenticateToken,
   saveAssessments
 );
-assessmentRouter.post("/getResults", getResults);
+assessmentRouter.post("/getResults", authenticateToken, getResults);
 
 export default assessmentRouter;
