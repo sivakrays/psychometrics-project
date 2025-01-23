@@ -9,14 +9,16 @@ export const userRegistration = async (req, res) => {
     const user = req.body;
     console.log(user);
     if (!user || !user.email || !user.password) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "email or password missing",
+        status: false,
       });
     }
 
     if (!validateEmail(user.email)) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "invalid email",
+        status: false,
       });
     }
 
@@ -33,6 +35,7 @@ export const userRegistration = async (req, res) => {
     const { name, email, id } = savedUser;
     res.status(200).json({
       message: "user registered successfully",
+      status: true,
       data: {
         id,
         name,
@@ -40,7 +43,7 @@ export const userRegistration = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message, status: false });
   }
 };
 
@@ -55,6 +58,7 @@ export const userLogin = async (req, res) => {
     const token = generateToken(user.id);
     res.status(200).json({
       message: "Login successful.",
+      status: true,
       data: {
         userId: user.id,
         token: token,
