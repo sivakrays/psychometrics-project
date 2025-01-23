@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 // to convert the http request body to json type or as object
-app.use(express.json({ extends: false }));
+app.use(express.json({ extends: true }));
 
 app.use(
   cors({
