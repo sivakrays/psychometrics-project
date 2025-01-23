@@ -7,6 +7,10 @@ const Option = sequelize.define("Option", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  points: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
 export default Option;

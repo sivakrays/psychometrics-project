@@ -7,6 +7,10 @@ const Assessment = sequelize.define("Assessment", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  category: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 export default Assessment;

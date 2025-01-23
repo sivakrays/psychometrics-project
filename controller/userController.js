@@ -58,3 +58,19 @@ export const userLogin = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const googleLogin = async (req, res) => {
+  res.send(
+    '<h1>Home</h1><a href="http://localhost:8080/api/googleLogin">Login with Google</a>'
+  );
+};
+
+export const googleCallback = async (req, res) => {
+  const userData = {
+    name: req.user.displayName,
+    email: req.user.email,
+  };
+  console.log(userData);
+  res.send(userData);
+  res.redirect("/");
+};

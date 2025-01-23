@@ -2,6 +2,7 @@ import express from "express";
 import {
   getAllAssessment,
   saveAssessments,
+  getResults,
 } from "../controller/AssessmentController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js";
 const assessmentRouter = express.Router();
@@ -13,5 +14,6 @@ assessmentRouter.post(
   authenticateToken,
   saveAssessments
 );
+assessmentRouter.post("/getResults", getResults);
 
 export default assessmentRouter;
