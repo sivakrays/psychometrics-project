@@ -16,9 +16,11 @@ export const getAllAssessment = async (req, res) => {
       res.status(200).json({ status: true, data: responseData });
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching Questions", error: error.message });
+    res.status(500).json({
+      message: "Error fetching Questions",
+      error: error.message,
+      status: false,
+    });
   }
 };
 
@@ -53,15 +55,18 @@ export const getResults = async (req, res) => {
     "Enterprising",
     "Conventional",
   ];
+  try {
+    // Dynamically filter answers and sum points by category
+    const categoryPoints = categories.reduce((acc, category) => {
+      const filteredAnswers = answer.filter((a) => a.category === category);
+      const totalPoints = filteredAnswers.reduce((sum, a) => sum + a.points, 0); // Sum the points for the filtered category
+      acc[category] = totalPoints; // Store only the total points for each category
+      return acc;
+    }, {});
 
-  // Dynamically filter answers and sum points by category
-  const categoryPoints = categories.reduce((acc, category) => {
-    const filteredAnswers = answer.filter((a) => a.category === category);
-    const totalPoints = filteredAnswers.reduce((sum, a) => sum + a.points, 0); // Sum the points for the filtered category
-    acc[category] = totalPoints; // Store only the total points for each category
-    return acc;
-  }, {});
-
-  // Responding with categorized answers
-  res.status(200).json(categoryPoints);
+    // Responding with categorized answers
+    res.status(200).json({ data: categoryPoints, status: true });
+  } catch (error) {
+    res.status(500).json({ error: error.message, status: true });
+  }
 };
