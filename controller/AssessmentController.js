@@ -10,6 +10,7 @@ export const getAllAssessment = async (req, res) => {
       const responseData = assessment.map((d, i) => ({
         questionId: d.id,
         question: d.question,
+        category: d.category,
         option: optionList,
       }));
       res.status(200).json({ status: true, data: responseData });
