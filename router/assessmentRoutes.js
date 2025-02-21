@@ -3,7 +3,7 @@ import {
   getAllAssessment,
   saveAssessments,
   getResults,
-} from "../controller/AssessmentController.js";
+} from "../controller/assessmentController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js";
 const assessmentRouter = express.Router();
 

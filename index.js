@@ -7,6 +7,7 @@ import router from "./router/router.js";
 import { configurePassport } from "./utils/passport.js";
 import passport from "passport";
 import session from "express-session"; // Import express-session
+import cookieSession from "cookie-session";
 
 // to use  .env file atributes
 dotenv.config();
@@ -14,7 +15,7 @@ dotenv.config();
 const app = express();
 
 // to convert the http request body to json type or as object
-app.use(express.json({ extends: true }));
+app.use(express.json());
 
 app.use(
   cors({
@@ -23,18 +24,22 @@ app.use(
 );
 
 autoCreate();
-configurePassport(passport);
-
-app.use(router);
 
 // Use sessions for tracking login state
 app.use(
-  session({ secret: "your-secret-key", resave: false, saveUninitialized: true })
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
 );
 
 // Initialize Passport.js
+configurePassport(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(router);
 
 // PORT connection from .env file
 app.listen(process.env.SERVER_PORT, () => {

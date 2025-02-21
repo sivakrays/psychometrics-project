@@ -12,25 +12,26 @@ const userRoutes = express.Router();
 
 userRoutes.post("/userRegistration", userRegistration);
 userRoutes.post("/userLogin", userLogin);
+
 userRoutes.get(
   "/googleLogin",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-userRoutes.get("/login/failed", (req, res) => {
-  res.status(401).json({
-    status: false,
-    message: failure,
-  });
-});
-
 userRoutes.get(
-  "auth/google/callback",
+  "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "https://psychometrics.onrender.com/",
-    failureRedirect: "/login/failed",
+    successRedirect: "/api/auth/callback/success",
+    failureRedirect: "/api/auth/callback/failure",
   })
 );
+// Success
+userRoutes.get("/auth/callback/success", googleCallback);
+
+// failure
+userRoutes.get("/auth/callback/failure", (req, res) => {
+  res.send("Error");
+});
 
 userRoutes.get("/googlePage", googleLogin);
 

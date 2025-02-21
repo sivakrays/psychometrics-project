@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 import Assessment from "./Assessment.js";
-import Option from "./Option.js";
+import Option from "./option.js";
 
 const QuestionOption = sequelize.define("QuestionOption", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },

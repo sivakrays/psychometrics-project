@@ -1,7 +1,7 @@
 // import { DataTypes } from "sequelize";
 // import sequelize from "../config/db.js";
 
-// const Answer = sequelize.define("Answer", {
+// const Results = sequelize.define("Results", {
 //   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 //   userId: {
 //     type: DataTypes.INTEGER,
@@ -29,4 +29,4 @@
 //   },
 // });
 
-// export default Answer;
+// export default Results;

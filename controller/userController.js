@@ -55,7 +55,7 @@ export const userLogin = async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: "Invalid email or password." });
     }
-    const token = generateToken(user.id);
+    const token = generateToken(user);
     res.status(200).json({
       message: "Login successful.",
       status: true,
@@ -76,11 +76,13 @@ export const googleLogin = async (req, res) => {
 };
 
 export const googleCallback = async (req, res) => {
+  if (!req.user) res.redirect("/auth/callback/failure");
   const userData = {
-    name: req.user.displayName,
-    email: req.user.email,
+    name: JSON.parse(req.user._raw).name,
+    email: JSON.parse(req.user._raw).email,
+    profile: JSON.parse(req.user._raw).picture,
   };
   console.log(userData);
   res.send(userData);
-  res.redirect("/");
+  // res.redirect("/");
 };
